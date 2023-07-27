@@ -34,6 +34,13 @@
 .calendar-title  .calendar-title-block {
     position: relative;
 }
+.calendar-title  .calendar-picker-arrow-down {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 20px;
+}
 .calendar-title  .calendar-picker-arrow-down::after {
     content: '';
     width: 10px;
@@ -42,7 +49,7 @@
     background-size: 100%;
     display: inline-block;
     position: absolute;
-    right: 16px;
+    left: 0;
     top: 16px;
     cursor: pointer;
 }
@@ -54,7 +61,7 @@
     background-size: 100%;
     display: inline-block;
     position: absolute;
-    right: 16px;
+    left: 0;
     top: 16px;
     cursor: pointer;
 }
@@ -87,6 +94,7 @@
     transition: background-color .2s ease;
     color: rgb(52, 65, 86);
     font-size: 14px;
+    text-align: center;
 }
 .calendar-table td.is-past {
     color: rgb(163, 180, 204);
@@ -165,10 +173,9 @@
   border: 1px solid rgb(237, 241, 246);
   border-radius: 4px;
   .calendar-content-wrap {
-    // padding: 12px 24px 16px;
-    // box-sizing: border-box;
-    // width: 496px;
-    padding: 0;
+    padding: 12px 24px 16px;
+    box-sizing: border-box;
+    width: 496px;
   }
   .calendar-slot-box {
     width: 100%;
@@ -213,7 +220,7 @@
   }
 }
 .el-button-group>.el-button {
-  width: 60px;
+  width: 42px;
   height: 32px;
   border: 1px solid rgb(237, 241, 246);
   border-radius: 4px;
@@ -225,7 +232,7 @@
   }
 }
 .el-button-group>.el-button:not(:last-child) {
-  width: 61px;
+  width: 42px;
 }
 .el-button-group > .el-button.calendar-gray-font {
   color: rgb(107, 116, 143);
