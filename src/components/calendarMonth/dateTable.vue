@@ -187,6 +187,4 @@ export default {
     },
 };
 </script>
-<style lang="less" scoped>
-@import '../../styles/calendarMonth.less';
-</style>
+

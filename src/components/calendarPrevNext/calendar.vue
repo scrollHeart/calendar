@@ -203,7 +203,5 @@ export default {
   },
 };
 </script>
-<style lang="less">
-@import '../../styles/calendar.less';
-</style>
+
 

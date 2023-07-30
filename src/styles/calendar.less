@@ -1,14 +1,101 @@
+.calendar-config-wrap {
+    width: 768px;
+    border-radius: 4px;
+    margin: 0 auto;
+    padding-bottom: 24px;
+}
+.calendar-cell-box {
+  padding-right: 28px;
+  >div {
+    width: 40px;
+    height: 40px;
+  }
+}
+.calendar-work-style {
+    color: rgb(247, 89, 86);
+    background: rgba(247, 89, 86, 0.2);
+    position: absolute;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    &::after {
+      content: '工';
+      display: block;
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      color: #fff;
+      background: #f75956;
+      font-size: 12px;
+    }
+}
+.calendar-no-work {
+    color: rgb(0, 92, 230);
+    background: rgba(0, 92, 230, 0.2);
+    position: absolute;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    &::after {
+      content: '非';
+      display: block;
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      color: #fff;
+      font-size: 12px;
+      background: rgb(0, 92, 230);
+    }
+}
+.is-past {
+  .calendar-work-style,
+  .calendar-no-work {
+    background: rgba(163, 180, 204, 0.1);
+    color: rgb(163, 180, 204);
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .calendar-work-style {
+    &::after {
+      content: '工';
+      color: rgb(163, 180, 204);
+    }
+  }
+  .calendar-no-work {
+    &::after {
+      content: '非';
+      color: rgb(163, 180, 204);
+    }
+  }
+}
 .calendar-wrap {
     background-color: #fff
 }
 
-.calendar-header {
-  width: 100%;
-}
+// .calendar-header {
+//     padding: 24px 24px 16px;
+// }
 
 .calendar-title {
-  display: flex;
-  justify-content: flex-end;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .calendar-title .calendar-picker-label {
     color: rgb(110, 118, 142);
@@ -16,26 +103,28 @@
     font-size: 14px;
     margin-right: 16px;
 }
-.calendar-title .el-input--prefix .el-input__inner {
+.calendar-title {
+  /deep/ .el-input--prefix .el-input__inner {
     padding-left: 16px;
     color: rgb(52, 65, 86);
-    width: 100px;
 }
-.calendar-title .el-icon-date {
+  /deep/ .el-icon-date {
     display: none;
+  }
+  /deep/ .el-icon-circle-close{
+      display: none;
+  }
 }
-.calendar-title  .el-icon-circle-close{
-    display: none;
-}
-.calendar-title  .calendar-title-year {
+
+.calendar-title  .calendar-title-block {
     position: relative;
 }
-.calendar-title  .calendar-title-month {
-  margin-left: 20px;
-}
-.calendar-title .el-select {
-  width: 80px;
-  margin-right: 8px;
+.calendar-title  .calendar-picker-arrow-down {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 20px;
 }
 .calendar-title  .calendar-picker-arrow-down::after {
     content: '';
@@ -45,7 +134,7 @@
     background-size: 100%;
     display: inline-block;
     position: absolute;
-    left: 80px;
+    // left: 0;
     top: 16px;
     cursor: pointer;
 }
@@ -57,7 +146,7 @@
     background-size: 100%;
     display: inline-block;
     position: absolute;
-    left: 80px;
+    right: 20px;
     top: 16px;
     cursor: pointer;
 }
@@ -90,16 +179,13 @@
     transition: background-color .2s ease;
     color: rgb(52, 65, 86);
     font-size: 14px;
+    text-align: center;
 }
-
-/* .calendar-table td.is-selected .scheduling-bg-box{
-    background-color: #F2F8FE
-} */
 .calendar-table td.is-past {
     color: rgb(163, 180, 204);
     pointer-events: none;
 }
-.calendar-table td.is-today .scheduling-bg-box::after {
+.calendar-table td.is-today .calendar-bg-box::after {
     content: "";
     width: 4px;
     height: 4px;
@@ -114,19 +200,49 @@
 .calendar-table .calendar-day {
     height: 40px;
     width: 40px;
-    margin-top: 16px;
 }
-.calendar-table .scheduling-bg-box {
+.calendar-table .calendar-bg-box {
     position: relative;
+    text-align: center;
 }
-.calendar-table .scheduling-bg-box:hover {
+.calendar-table .calendar-bg-box:hover {
     cursor: pointer;
     background-color: #F2F8FE
 }
-.scheduling-bg-box >div {
+.calendar-bg-box >div {
     width: 100%;
     height: 100%;
     line-height: 40px;
+}
+.calendar-table td:nth-child(-n+5) .calendar-bg-box:hover >div:after {
+    content: '非';
+    display: block;
+    position: absolute;
+    right: -4px;
+    top: -4px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    background-color: #005ce6;
+    border-radius: 2px;
+    font-size: 12px;
+}
+.calendar-table td:nth-child(n+6) .calendar-bg-box:hover >div:after {
+    content: '工';
+    display: block;
+    position: absolute;
+    right: -4px;
+    top: -4px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    background-color: #f75956;
+    border-radius: 2px;
+    font-size: 12px;
+    // background: url('../assets/image/work.png') no-repeat;
+    // background-size: 100%;
 }
 .calendar-color-gray {
     background-color: rgb(163, 180, 204);
@@ -135,7 +251,7 @@
     background-color: rgb(30, 204, 153);
 }
 .calendar-button-group {
-  margin-top: 10px;
+  // padding: 0 24px;
     mark {
         width: 8px;
         height: 8px;
@@ -144,13 +260,15 @@
     }
 }
 .calendar-main-wrap {
-  margin-top: 16px;
+  // margin: 16px 24px;
   display: flex;
   box-sizing: border-box;
   border: 1px solid rgb(237, 241, 246);
+  border-radius: 4px;
   .calendar-content-wrap {
     padding: 12px 24px 16px;
     box-sizing: border-box;
+    width: 496px;
   }
   .calendar-slot-box {
     width: 100%;
@@ -161,6 +279,7 @@
   justify-content: flex-end;
   display: flex;
   margin-bottom: 8px;
+  text-align: center;
   span {
     display: inline-block;
     width: 60px;
@@ -182,7 +301,7 @@
     left: 0;
     bottom: 0;
     width: calc(100% - 2px);
-    height: 100%;
+    height: calc(100% - 2px);
     border: 1px solid #005ce6!important;
     border-radius: 4px!important;
     z-index: 1;
@@ -194,9 +313,10 @@
   }
 }
 .el-button-group>.el-button {
-  width: 60px;
+  width: 42px;
   height: 32px;
   border: 1px solid rgb(237, 241, 246);
+  border-radius: 4px;
   color: rgb(52, 65, 86);
   font-size: 14px;
   padding: 0;
@@ -204,12 +324,11 @@
     background: rgba(0, 92, 230, 0.05);
   }
 }
+.el-button-group>.el-button:not(:last-child) {
+  width: 42px;
+}
 .el-button-group > .el-button.calendar-gray-font {
   color: rgb(107, 116, 143);
-}
-.el-date-editor.el-input {
-  width: 100px;
-  margin-right: 8px;
 }
 .calendar-cant-event{
   pointer-events: none;
@@ -225,27 +344,50 @@
   border-radius:4px;
   color: #fff;
 }
-// 上下月
-.calendar-title-month-btn {
-  border: 1px solid #DCDFE6;
-  border-radius: 4px;
-  height: 30px;
-  margin-top: 8px;
-  .el-button+.el-button {
-    margin-left: 0;
+.calendar-title-right {
+  color: rgb(52, 65, 86);
+  span {
+      margin-left: 16px;
   }
-  .el-button {
-    border: none;
-    border-radius: 0;
+  .config-flag {
+      &:before {
+          content: '';
+          display: inline-block;
+          background-color: rgb(30, 204, 153);
+          margin-right: 8px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+      }
   }
-  .today.el-button {
-    border-left: 1px solid #DCDFE6;
-    border-right: 1px solid #DCDFE6;
+  .no-config-flag {
+      &:before {
+          content: '';
+          display: inline-block;
+          background-color: rgb(163, 180, 204);
+          margin-right: 8px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+      }
   }
 }
+.calendar-cantclick {
+  pointer-events: none;
+  visibility: hidden;
+}
+.cantclick {
+    pointer-events: none;
+    visibility: hidden;
+  }
+.el-input__prefix {
+    display: none;
+}
+.el-date-editor.el-input,
+.el-input--suffix .el-input__inner {
+    width: 120px;
+}
+.calendar-title-year,
 .calendar-title-month-picker {
-  position: relative;
-}
-.calendar-title-month-picker .el-input--prefix .el-input__inner {
-  border: none;
+    position: relative;
 }
